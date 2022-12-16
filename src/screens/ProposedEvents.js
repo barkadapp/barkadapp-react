@@ -1,6 +1,6 @@
 import BidDialog from "../components/BidDialog";
 import React from "react";
-import { Text, View } from "react-native";
+import { Text, View, ScrollView } from "react-native";
 import { Button, Card, Paragraph, Divider } from "react-native-paper";
 
 export default function ProposedEvents({ navigation }) {
@@ -13,7 +13,7 @@ export default function ProposedEvents({ navigation }) {
   const fetchEvents = () => {
     global.db.transaction((tx) => {
       tx.executeSql("SELECT * FROM events", [], (_, { rows }) => {
-        setProposedEvents(rows._array);
+        setProposedEvents(rows._array.reverse());
       });
     });
   };
@@ -75,7 +75,7 @@ export default function ProposedEvents({ navigation }) {
   }, [visible]);
 
   return (
-    <View style={{ margin: 20 }}>
+    <ScrollView style={{ margin: 20 }}>
       <BidDialog
         visible={visible}
         setVisible={setVisible}
@@ -93,7 +93,7 @@ export default function ProposedEvents({ navigation }) {
       <Divider style={{ marginTop: 10, marginBottom: 10 }} />
       {proposedEvents?.map((event) => {
         return (
-          <View key={event.id}>
+          <View key={event.id} style={{ marginBottom: 10 }}>
             <Card
               onPress={() =>
                 navigation.navigate("Proposal", {
@@ -106,7 +106,7 @@ export default function ProposedEvents({ navigation }) {
               <Card.Content>
                 <Text>{event.location}</Text>
                 <Text>{event.date}</Text>
-                <Paragraph style={{ textAlign: "justify" }}>
+                <Paragraph>
                   {event.description}
                 </Paragraph>
               </Card.Content>
@@ -125,6 +125,6 @@ export default function ProposedEvents({ navigation }) {
           </View>
         );
       })}
-    </View>
+    </ScrollView>
   );
 }

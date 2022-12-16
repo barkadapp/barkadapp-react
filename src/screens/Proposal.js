@@ -37,19 +37,13 @@ export default function Proposal({ route, navigation }) {
           objectFit: "fit",
         }}
         source={{
-          uri: "https://picsum.photos/400/400",
+          uri: "https://picsum.photos/400/200",
         }}
       />
 
       <View style={styles.section}>
         <Text style={{ color: "gray" }}>Description</Text>
-        <Paragraph
-          style={{
-            textAlign: "justify",
-          }}
-        >
-          {proposal.description}
-        </Paragraph>
+        <Paragraph>{proposal.description}</Paragraph>
       </View>
       <View style={styles.section}>
         <Text style={{ color: "gray" }}>When</Text>
@@ -73,7 +67,14 @@ export default function Proposal({ route, navigation }) {
         >
           {proposal.bidders &&
             JSON.parse(proposal.bidders).map((bidder, idx) => (
-              <View key={idx} style={{ display: "flex", flexDirection: "row" }}>
+              <View
+                key={idx}
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  marginBottom: 10,
+                }}
+              >
                 <Avatar.Image
                   size={24}
                   source={`https://avatars.dicebear.com/api/adventurer/${Math.random()

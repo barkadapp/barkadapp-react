@@ -17,7 +17,7 @@ export default function Selection({ navigation }) {
           marginBottom: 20,
         }}
         icon="pencil-outline"
-        mode="elevated"
+        mode="contained"
         onPress={() => navigation.navigate("Propose an Event")}
       >
         Propose an event
@@ -27,7 +27,7 @@ export default function Selection({ navigation }) {
           marginBottom: 20,
         }}
         icon="import"
-        mode="elevated"
+        mode="contained"
         onPress={() => navigation.navigate("Proposed Events")}
       >
         View proposed events
